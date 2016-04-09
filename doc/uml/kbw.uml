@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="193.0" y="91.0">keyboard_warrior.game.Game</node>
+    <node x="687.0" y="293.0">keyboard_warrior.world.Map</node>
+    <node x="0.0" y="0.0">keyboard_warrior.Main</node>
+    <node x="0.0" y="705.0">keyboard_warrior.io.TextReader</node>
+    <node x="980.0" y="541.0">keyboard_warrior.world.Location</node>
+    <node x="427.99999999999994" y="293.0">keyboard_warrior.inventory.Item</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="keyboard_warrior.world.Map" target="keyboard_warrior.world.Location">
+      <point x="0.0" y="5.0" />
+      <point x="1094.0" y="402.0" />
+      <point x="-5.0" y="0.0" />
+    </edge>
+    <edge source="keyboard_warrior.Main" target="keyboard_warrior.game.Game">
+      <point x="0.0" y="0.0" />
+      <point x="290.5" y="25.5" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="keyboard_warrior.game.Game" target="keyboard_warrior.world.Map">
+      <point x="0.0" y="0.0" />
+      <point x="813.5" y="172.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="keyboard_warrior.game.Game" target="keyboard_warrior.inventory.Item">
+      <point x="0.0" y="0.0" />
+      <point x="537.5" y="172.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7190721649484536" x="609.0" y="378.0" />
+  <SelectedNodes>
+    <node>keyboard_warrior.inventory.Item</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
