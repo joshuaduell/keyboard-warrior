@@ -25,23 +25,27 @@ public class Game {
 
 		do {
 			//always start with a blank line
-			System.out.println();
+			putLine();
 			input = in.next();
 
 			if(input.equalsIgnoreCase("north")
 					|| input.equalsIgnoreCase("south")
 					|| input.equalsIgnoreCase("east")
 					|| input.equalsIgnoreCase("west")) {
-
+				putLine();
 				map.move(input);
 			}else if (input.equalsIgnoreCase("help")) {
+				putLine();
 				help();
 			}else if (input.equalsIgnoreCase("look")) {
+				putLine();
 				look(map.getCurrentLocation());
 			}else if (input.equalsIgnoreCase("bag")) {
+				putLine();
 				bag(inventory);
 			}else if(!input.equalsIgnoreCase("quit")){
-				System.out.println("What?");
+				putLine();
+				putLine("What?");
 			}
 		}while(!input.equalsIgnoreCase("quit"));
 	}
@@ -51,28 +55,29 @@ public class Game {
 		//TODO: Note to Duell
 		/*
 			I had to change this to use print over println, we didn't see difference in the console but when I
-			ran it with cmd the lines wouldn't wrap properly.
+			ran it with cmd the lines wouldn't wrap properly. I believe println strips any newline characters
+			and adds one to the end.
 		 */
-		System.out.print(welcomeText);
-		System.out.println("Welcome to Keyboard Warrior");
-		System.out.println();
+		put(welcomeText);
+		putLine("Welcome to Keyboard Warrior");
+		putLine();
 		help();
-		System.out.println();
+		putLine();
 	}
 
 	public void help() {
-		System.out.println("HELP");
-		System.out.println("Type one of the following commands to interact with the world");
-		System.out.println("'north', 'south', 'east' or 'west' to move");
-		System.out.println("'look' to describe the surroundings.");
-		System.out.println("'bag' to see your inventory.");
-		System.out.println("'quit' to exit the game.");
-		System.out.println("'help' to see this message again.");
+		putLine("HELP");
+		putLine("Type one of the following commands to interact with the world");
+		putLine("'north', 'south', 'east' or 'west' to move");
+		putLine("'look' to describe the surroundings.");
+		putLine("'bag' to see your inventory.");
+		putLine("'quit' to exit the game.");
+		putLine("'help' to see this message again.");
 	}
 
 	public void start() {
-		System.out.println("You pull yourself out of the river... the jungle air is so thick with moisture it barely feels like you left it. ");
-		System.out.println();
+		putLine("You pull yourself out of the river... the jungle air is so thick with moisture it barely feels like you left it. ");
+		putLine();
 	}
 
 	public void look(Location currentLocation) {
@@ -80,13 +85,28 @@ public class Game {
 	}
 
 	public void bag(Item[] container) {
-		System.out.println("You look in your bag.");
-		System.out.println();
+		putLine("You look in your bag.");
+		putLine();
 
 		for (int i = 0; i < container.length; i++)
 		{
-			System.out.println("[" + i + "]" + ": " + container[i]);
+			putLine("[" + i + "]" + ": " + container[i]);
 		}
+	}
+
+	public void putLine(String message)
+	{
+		System.out.println(message);
+	}
+
+	public void putLine()
+	{
+		System.out.println();
+	}
+
+	public void put(String message)
+	{
+		System.out.print(message);
 	}
 }
 
