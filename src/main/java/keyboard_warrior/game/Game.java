@@ -52,8 +52,13 @@ public class Game {
 //		help();
 //		System.out.println();
 
-		String welcomeText = TextReader.readTextFile("res/welcome_screen.txt");
-		System.out.println(welcomeText);
+		String welcomeText = TextReader.readTextFile("/welcome_screen.txt");
+		//TODO: Note to Duell
+		/*
+			I had to change this to use print over println, we didn't see differences issues in the console but when I
+			ran it with cmd the lines wouldn't wrap properly.
+		 */
+		System.out.print(welcomeText);
 	}
 
 	public void help() {

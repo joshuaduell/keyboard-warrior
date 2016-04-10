@@ -1,40 +1,30 @@
 package keyboard_warrior.io;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- * Created by joshua on 07/04/2016.
+ * Reads text files..
  */
 public class TextReader {
 
-    public static String readTextFile(String aFileName) {
-        Path path = Paths.get(aFileName);
-        String fileString = "";
-        try (Scanner scanner =  new Scanner(path)){
-            while (scanner.hasNextLine()){
-                //process each line in some way
-                fileString += scanner.nextLine() + "\n";
-            }
-            return fileString;
-        }
-        catch (IOException e) {
-            System.out.println("TextReader.readTextFile: Failed to scan file at - " + path);
-            e.printStackTrace();
+    public static String readTextFile(String fileName) {
+        InputStream inputStream = TextReader.class.getResourceAsStream(fileName);
+
+        if (inputStream == null) {
+            //TODO: We should print an error message here, but its probably worth creating a Debug class that handles that
             return "";
         }
-    }
 
-//    public static void readLargerTextFileAlternate(String aFileName) throws IOException {
-//        Path path = Paths.get(aFileName);
-//        try (BufferedReader reader = Files.newBufferedReader(path)){
-//            String line = null;
-//            while ((line = reader.readLine()) != null) {
-//                //process each line in some way
-//               // log(line);
-//            }
-//        }
-//    }
+        Scanner scanner =  new Scanner(inputStream);
+        String fileString = "";
+
+        while (scanner.hasNextLine()){
+            fileString += scanner.nextLine() + "\n";
+        }
+
+        scanner.close();
+
+        return fileString;
+    }
 }
