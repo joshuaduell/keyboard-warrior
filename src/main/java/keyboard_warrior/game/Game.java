@@ -1,7 +1,7 @@
 package keyboard_warrior.game;
 
 import keyboard_warrior.inventory.Item;
-import keyboard_warrior.io.TextReader;
+import keyboard_warrior.util.TextReader;
 import keyboard_warrior.world.Location;
 import keyboard_warrior.world.Map;
 

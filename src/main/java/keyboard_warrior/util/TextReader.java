@@ -1,4 +1,4 @@
-package keyboard_warrior.io;
+package keyboard_warrior.util;
 
 import java.io.InputStream;
 import java.util.Scanner;
