@@ -21,13 +21,17 @@ public class Game {
 		welcomeMessage();
 		start();
 		//set start location
-		map.setLocation(9,0);
+		map.setLocation(9,0); //TODO: Shouldn't the map have a starting location?
 
 		do {
-			//always start with a blank line
+			//always start with a blank line and a separator
 			putLine();
+			String separator = TextReader.readTextFile("/separator_1.txt");
+			put(separator);
+
 			input = in.next();
 
+			//TODO: Since we may have many commands its probably worth handling them in a different class
 			if(input.equalsIgnoreCase("north")
 					|| input.equalsIgnoreCase("south")
 					|| input.equalsIgnoreCase("east")
@@ -52,7 +56,7 @@ public class Game {
 
 	public void welcomeMessage() {
 		String welcomeText = TextReader.readTextFile("/welcome_screen.txt");
-		//TODO: Note to Duell
+		//TODO: Note to Duell:
 		/*
 			I had to change this to use print over println, we didn't see difference in the console but when I
 			ran it with cmd the lines wouldn't wrap properly. I believe println strips any newline characters
