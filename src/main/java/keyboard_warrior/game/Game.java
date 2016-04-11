@@ -4,6 +4,7 @@ import keyboard_warrior.inventory.Item;
 import keyboard_warrior.util.TextReader;
 import keyboard_warrior.world.Location;
 import keyboard_warrior.world.Map;
+import keyboard_warrior.world.Story;
 
 import java.util.Scanner;
 
@@ -18,8 +19,19 @@ public class Game {
 		Item[] inventory = new Item[5];
 		String input;
 
+		//Story test
+
+		Story testStory = new Story();
+
 		welcomeMessage();
+
+
 		start();
+
+		put(testStory.firstNode.description);
+
+		putLine();
+
 		//set start location
 		map.setLocation(9,0); //TODO: Shouldn't the map have a starting location?
 
@@ -47,6 +59,9 @@ public class Game {
 			}else if (input.equalsIgnoreCase("bag")) {
 				putLine();
 				bag(inventory);
+			}else if (input.equalsIgnoreCase("transition")) {
+				putLine();
+				put(testStory.firstNode.transitions.get(0).nodeTo.description);
 			}else if(!input.equalsIgnoreCase("quit")){
 				putLine();
 				putLine("What?");
