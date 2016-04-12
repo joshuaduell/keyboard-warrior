@@ -1,8 +1,9 @@
 package keyboard_warrior.game;
 
-import keyboard_warrior.inventory.Item;
 import keyboard_warrior.util.TextReader;
 import keyboard_warrior.world.Story;
+import keyboard_warrior.world.StoryNode;
+import keyboard_warrior.world.StoryTransition;
 
 import java.util.Scanner;
 
@@ -12,55 +13,85 @@ import java.util.Scanner;
 public class Game {
 
 	public Game() {
-        Story testStory = new Story();
+        Story story = createMockStory();
+        StoryNode currentStoryNode = story.getStartNode();
 
         welcomeMessage();
+        printLine();
 
 		Scanner in = new Scanner(System.in);
 		String input;
 
-		put(testStory.firstNode.description);
-		putLine();
-
 		do {
-			//always start with a blank line and a separator
-			putLine();
+            print(currentStoryNode.description);
+
+			printLine();
 			String separator = TextReader.readTextFile("/separator_1.txt");
-			put(separator);
+			print(separator);
 
 			input = in.next();
 
-			if (input.equalsIgnoreCase("next")) {
-				putLine();
-				put(testStory.firstNode.transitions.get(0).nodeTo.description);
+            if (input.equalsIgnoreCase("repeat")) {
+                printLine();
+            }else if (input.equalsIgnoreCase("next")) {
+				printLine();
+				currentStoryNode = getNextNode(currentStoryNode);
 			}else if(!input.equalsIgnoreCase("quit")){
-				putLine();
-				putLine("What?");
+				printLine();
+				printLine("What?");
 			}
 		}while(!input.equalsIgnoreCase("quit"));
 	}
 
 	public void welcomeMessage() {
 		String welcomeText = TextReader.readTextFile("/welcome_screen.txt");
-		put(welcomeText);
-        putLine();
-		putLine("Welcome to Keyboard Warrior");
-		putLine();
+		print(welcomeText);
+        printLine();
+		printLine("Welcome to Keyboard Warrior, type 'repeat' or 'next'");
+		printLine();
 	}
 
-    public void putLine()
+    private void printLine()
     {
         System.out.println();
     }
 
-	public void putLine(String message)
+	private void printLine(String message)
 	{
 		System.out.println(message);
 	}
 
-	public void put(String message)
+	private void print(String message)
 	{
 		System.out.print(message);
 	}
+
+    //STORY TESTING
+    private Story createMockStory()
+    {
+        Story story = new Story();
+
+        StoryNode node1 = new StoryNode();
+        node1.description = "You are on Tinmeadow Crescent, smoking your last joint";
+
+        StoryNode node2 = new StoryNode();
+        node2.description = "Leo Dennis has confronted you wielding an 8th";
+
+        StoryTransition transition1to2 = new StoryTransition(node1, node2);
+        node1.addTransition(transition1to2);
+
+        StoryTransition transition2to1 = new StoryTransition(node2, node1);
+        node2.addTransition(transition2to1);
+
+        story.setStartNode(node1);
+
+        return story;
+    }
+
+    //TODO: Just for testing, assumes there is at least 1 transition
+    private StoryNode getNextNode(StoryNode currentStoryNode)
+    {
+        return currentStoryNode.transitions.get(0).nodeTo;
+    }
 }
 

@@ -4,25 +4,36 @@ import java.util.ArrayList;
 
 public class Story {
 
-    public ArrayList<StoryNode> nodes;
-    public StoryNode firstNode;
+    private ArrayList<StoryNode> nodes;
+    private StoryNode startNode;
 
     public Story(){
 
-        nodes = new ArrayList<StoryNode>();
-
-        firstNode = new StoryNode();
-
-        firstNode.description = "You are on Tinmeadow Crescent";
-
-        StoryNode secondNode = new StoryNode();
-
-        secondNode.description = "Leo Dennis has confronted you";
-
-        StoryTransition transition1to2 = new StoryTransition(firstNode, secondNode);
-
-        firstNode.addTransition(transition1to2);
-
+        nodes = new ArrayList<>();
     }
 
+    public StoryNode getStartNode()
+    {
+        return startNode;
+    }
+
+    public void setStartNode(StoryNode node)
+    {
+        startNode = node;
+    }
+
+    public StoryNode getNode(int index)
+    {
+        return nodes.get(index);
+    }
+
+    public void addNode(StoryNode node)
+    {
+        nodes.add(node);
+    }
+
+    public void addNode(StoryNode node, int index)
+    {
+        nodes.add(index, node);
+    }
 }
