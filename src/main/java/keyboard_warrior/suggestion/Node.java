@@ -33,7 +33,6 @@ public class Node
 
     public boolean checkWord(String word)
     {
-
         for(String key : transitions.keySet())
         {
             if(key.equalsIgnoreCase(word))
@@ -47,8 +46,14 @@ public class Node
 
     public Node findNode(String word)
     {
+        for(String key : transitions.keySet())
+        {
+            if (key.equalsIgnoreCase(word))
+            {
+                return transitions.get(key);
+            }
+        }
 
-
-        return transitions.get(word);
+        return null;
     }
 }
