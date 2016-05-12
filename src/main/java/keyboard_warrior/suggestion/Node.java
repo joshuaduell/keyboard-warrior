@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Node
 {
     private String description;
-    private HashMap<String, Node> transitions; //Stores choices as keys and the nodes they lead to as values
+    public HashMap<String, Node> transitions; //Stores choices as keys and the nodes they lead to as values
 
     public Node(String description)
     {
@@ -33,11 +33,22 @@ public class Node
 
     public boolean checkWord(String word)
     {
-        return transitions.containsKey(word);
+
+        for(String key : transitions.keySet())
+        {
+            if(key.equalsIgnoreCase(word))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public Node findNode(String word)
     {
+
+
         return transitions.get(word);
     }
 }
