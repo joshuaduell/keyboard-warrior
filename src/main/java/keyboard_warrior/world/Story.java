@@ -5,31 +5,46 @@ import java.util.ArrayList;
 public class Story {
 
     private ArrayList<StoryNode> nodes;
-    private StoryNode startNode;
+    private int startNodeId;
 
     public Story(){
 
         nodes = new ArrayList<>();
     }
 
-    public StoryNode getStartNode()
+    public StoryNode getNode(int nodeId) throws Exception
     {
-        return startNode;
+        for(StoryNode node : nodes)
+        {
+            if(node.getId() == nodeId)
+            {
+                return node;
+            }
+        }
+        throw new Exception("Start node does not exist");
     }
 
-    public void setStartNode(StoryNode node)
+    public StoryNode getStartNode() throws Exception
     {
-        startNode = node;
+        return getNode(startNodeId);
     }
 
-    public StoryNode getNode(int index)
+    public void setStartNodeId(int nodeId)
     {
-        return nodes.get(index);
+        startNodeId = nodeId;
     }
+
+//    public StoryNode getNode(int index)
+//    {
+//        return nodes.get(index);
+//    }
 
     public void addNode(StoryNode node)
     {
-        nodes.add(node);
+        if(!(nodes.contains(node)))
+        {
+            nodes.add(node);
+        }
     }
 
     public void addNode(StoryNode node, int index)

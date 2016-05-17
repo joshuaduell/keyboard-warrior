@@ -2,13 +2,37 @@ package keyboard_warrior.world;
 
 public class StoryTransition {
 
-    public StoryNode nodeTo;
-    public StoryNode nodeFrom;
+    private String keyWord;
+    private int nextNodeId;
 
-    public StoryTransition(StoryNode nodeFrom, StoryNode nodeTo) {
+    public StoryTransition()
+    {
 
-        this.nodeTo = nodeTo;
-        this.nodeFrom = nodeFrom;
+    }
 
+    public StoryTransition(String keyWord, int nextNodeId)
+    {
+        this.keyWord = keyWord;
+        this.nextNodeId = nextNodeId;
+    }
+
+    public String getKeyWord()
+    {
+        return keyWord;
+    }
+
+    public int getNextNode()
+    {
+        return nextNodeId;
+    }
+
+    public void setKeyWordId(String keyWord)
+    {
+        this.keyWord = keyWord;
+    }
+
+    public void setNextNodeId(int nextNode)
+    {
+        this.nextNodeId = nextNode;
     }
 }

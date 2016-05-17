@@ -12,9 +12,23 @@ import java.util.Scanner;
  */
 public class Game {
 
+    private Story activeStory;
+
 	public Game() {
-        Story story = createMockStory();
-        StoryNode currentStoryNode = story.getStartNode();
+        activeStory = createMockStory();
+        StoryNode currentStoryNode = null;
+
+        try
+        {
+            currentStoryNode = activeStory.getStartNode();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.exit(0);
+        }
+
+
 
         welcomeMessage();
         printLine();
@@ -23,7 +37,7 @@ public class Game {
 		String input;
 
 		do {
-            print(currentStoryNode.description);
+            print(currentStoryNode.getDescription());
 
 			printLine();
 			String separator = TextReader.readTextFile("/separator_1.txt");
@@ -35,7 +49,7 @@ public class Game {
                 printLine();
             }else if (input.equalsIgnoreCase("next")) {
 				printLine();
-				currentStoryNode = getNextNode(currentStoryNode);
+				//currentStoryNode = getNextNode(currentStoryNode);
 			}else if(!input.equalsIgnoreCase("quit")){
 				printLine();
 				printLine("What?");
@@ -72,26 +86,23 @@ public class Game {
         Story story = new Story();
 
         StoryNode node1 = new StoryNode();
-        node1.description = "You are on Tinmeadow Crescent, smoking your last joint";
+        node1.setDescription("You are on Tinmeadow Crescent, smoking your last joint");
+        node1.setId(1);
 
         StoryNode node2 = new StoryNode();
-        node2.description = "Leo Dennis has confronted you wielding an 8th";
+        node2.setDescription("Leo Dennis has confronted you wielding an 8th");
+        node2.setId(2);
 
-        StoryTransition transition1to2 = new StoryTransition(node1, node2);
+        StoryTransition transition1to2 = new StoryTransition("kick", node2.getId());
         node1.addTransition(transition1to2);
 
-        StoryTransition transition2to1 = new StoryTransition(node2, node1);
+        StoryTransition transition2to1 = new StoryTransition("punch", node1.getId());
         node2.addTransition(transition2to1);
 
-        story.setStartNode(node1);
+        story.setStartNodeId(node1.getId());
 
         return story;
     }
 
-    //TODO: Just for testing, assumes there is at least 1 transition
-    private StoryNode getNextNode(StoryNode currentStoryNode)
-    {
-        return currentStoryNode.transitions.get(0).nodeTo;
-    }
 }
 
