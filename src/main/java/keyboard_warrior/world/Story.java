@@ -12,7 +12,7 @@ public class Story {
         nodes = new ArrayList<>();
     }
 
-    public StoryNode getNode(int nodeId) throws Exception
+    public StoryNode getNode(int nodeId)
     {
         for(StoryNode node : nodes)
         {
@@ -21,10 +21,10 @@ public class Story {
                 return node;
             }
         }
-        throw new Exception("Start node does not exist");
+        return null;
     }
 
-    public StoryNode getStartNode() throws Exception
+    public StoryNode getStartNode()
     {
         return getNode(startNodeId);
     }

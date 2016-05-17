@@ -72,4 +72,29 @@ public class StoryNode {
             transitions.remove(index);
         }
     }
+
+    public boolean checkKeyWord(String keyWord)
+    {
+        for(StoryTransition storyTransition : transitions)
+        {
+            if(storyTransition.getKeyWord().equalsIgnoreCase(keyWord))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public StoryTransition getTransition(String keyWord)
+    {
+        for(StoryTransition storyTransition : transitions)
+        {
+            if(storyTransition.getKeyWord().equalsIgnoreCase(keyWord))
+            {
+                return storyTransition;
+            }
+        }
+        return null;
+    }
 }

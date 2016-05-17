@@ -17,44 +17,40 @@ public class Game {
 	public Game() {
         activeStory = createMockStory();
         StoryNode currentStoryNode = null;
-
-        try
+        boolean running = true;
+        currentStoryNode = activeStory.getStartNode();
+        if(currentStoryNode == null)
         {
-            currentStoryNode = activeStory.getStartNode();
+            print("Start node is null");
+            System.exit(1);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            System.exit(0);
-        }
-
-
-
         welcomeMessage();
         printLine();
 
 		Scanner in = new Scanner(System.in);
 		String input;
 
-		do {
-            print(currentStoryNode.getDescription());
+        printLine(currentStoryNode.getDescription());
 
-			printLine();
-			String separator = TextReader.readTextFile("/separator_1.txt");
-			print(separator);
+        while(running)
+        {
+            input = in.next();
 
-			input = in.next();
-
-            if (input.equalsIgnoreCase("repeat")) {
-                printLine();
-            }else if (input.equalsIgnoreCase("next")) {
-				printLine();
-				//currentStoryNode = getNextNode(currentStoryNode);
-			}else if(!input.equalsIgnoreCase("quit")){
-				printLine();
-				printLine("What?");
-			}
-		}while(!input.equalsIgnoreCase("quit"));
+            if(input.equalsIgnoreCase("exit"))
+            {
+                printLine("Goodbye");
+                return;
+            }
+            else if(currentStoryNode.checkKeyWord(input))
+            {
+                currentStoryNode = activeStory.getNode(currentStoryNode.getTransition(input).getNextNode());
+                printLine(currentStoryNode.getDescription());
+            }
+            else
+            {
+                printLine("What?");
+            }
+        }
 	}
 
 	public void welcomeMessage() {
@@ -98,6 +94,9 @@ public class Game {
 
         StoryTransition transition2to1 = new StoryTransition("punch", node1.getId());
         node2.addTransition(transition2to1);
+
+        story.addNode(node1);
+        story.addNode(node2);
 
         story.setStartNodeId(node1.getId());
 
