@@ -12,12 +12,16 @@ import java.util.Scanner;
 /**
  * The game.
  */
-public class Game {
-
+public class Game
+{
+    private Player player;
     private Story activeStory;
+    private StoryNode currentStoryNode;
 
-	public Game() {
+	public Game()
+    {
         activeStory = createMockStory();
+        player = new Player();
 
         try {
             FileManager.saveStory(activeStory, "test_story.txt");
@@ -34,8 +38,8 @@ public class Game {
             e.printStackTrace();
             System.exit(1);
         }
-
         StoryNode currentStoryNode = null;
+
         boolean running = true;
         currentStoryNode = activeStory.getStartNode();
         if(currentStoryNode == null)
@@ -62,8 +66,19 @@ public class Game {
             }
             else if(currentStoryNode.checkKeyWord(input))
             {
-                currentStoryNode = activeStory.getNode(currentStoryNode.getTransition(input).getNextNode());
-                printLine(currentStoryNode.getDescription());
+                StoryTransition t = currentStoryNode.getTransition(input);
+
+                if(!t.requiresItems())
+                {
+                    currentStoryNode = activeStory.getNode(t.getNextNodeId());
+                    printLine(currentStoryNode.getDescription());
+                }
+                else
+                {
+                    //Check player items against transition items
+                    //If player has required items, remove items from inventory and make transition
+                    //Else print you're missing something
+                }
             }
             else
             {

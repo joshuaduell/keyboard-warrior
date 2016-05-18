@@ -1,27 +1,37 @@
 package keyboard_warrior.inventory;
 
-public class Item {
-	
+public class Item
+{
 	private String name;
 	private String description;
 
-	public Item (String name){
-		this.name = name;
+	public Item()
+	{
+
 	}
 
-	public String getName(){
+	public Item (String name, String description)
+	{
+		this.name = name;
+		this.description = description;
+	}
+
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setItemName(String name){
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getDescription(){
+	public String getDescription()
+	{
 		return description;
 	}
 
-	public void setItemDescription(String name)
+	public void setDescription(String description)
 	{
 		this.description = description;
 	}
