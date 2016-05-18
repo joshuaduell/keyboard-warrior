@@ -27,10 +27,10 @@ public class FileManager {
         return loadFromJson(fileName, Story.class);
     }
 
-    public static <T> T loadFromJson(String fileName, Class<T> tClass) throws IOException
+    public static <T> T loadFromJson(String fileName, Class<T> classType) throws IOException
     {
         String json = readFileAsString(getSaveDirPath(), fileName, Charset.defaultCharset());
-        return getJsonSerializer().fromJson(json, tClass);
+        return getJsonSerializer().fromJson(json, classType);
     }
 
     public static void saveToJson(Object object, String fileName) throws IOException
