@@ -1,10 +1,12 @@
 package keyboard_warrior.game;
 
+import keyboard_warrior.io.FileManager;
 import keyboard_warrior.util.TextReader;
 import keyboard_warrior.world.Story;
 import keyboard_warrior.world.StoryNode;
 import keyboard_warrior.world.StoryTransition;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -16,6 +18,23 @@ public class Game {
 
 	public Game() {
         activeStory = createMockStory();
+
+        try {
+            FileManager.saveStory(activeStory, "test_story.txt");
+        } catch (IOException e) {
+            print("failed to save story");
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        try {
+            activeStory = FileManager.loadStory("test_story.txt");
+        } catch (IOException e) {
+            print("failed to load story");
+            e.printStackTrace();
+            System.exit(1);
+        }
+
         StoryNode currentStoryNode = null;
         boolean running = true;
         currentStoryNode = activeStory.getStartNode();
