@@ -1,22 +1,25 @@
 package keyboard_warrior.game;
 
 import keyboard_warrior.io.FileManager;
+import keyboard_warrior.inventory.Item;
 import keyboard_warrior.util.TextReader;
 import keyboard_warrior.world.Story;
 import keyboard_warrior.world.StoryNode;
 import keyboard_warrior.world.StoryTransition;
-
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The game.
  */
+
 public class Game
 {
     private Player player;
     private Story activeStory;
     private StoryNode currentStoryNode;
+
 
 	public Game()
     {
@@ -39,7 +42,7 @@ public class Game
             System.exit(1);
         }
         StoryNode currentStoryNode = null;
-
+        
         boolean running = true;
         currentStoryNode = activeStory.getStartNode();
         if(currentStoryNode == null)
@@ -70,14 +73,18 @@ public class Game
 
                 if(!t.requiresItems())
                 {
-                    currentStoryNode = activeStory.getNode(t.getNextNodeId());
-                    printLine(currentStoryNode.getDescription());
+                    makeTransition(t);
                 }
                 else
                 {
-                    //Check player items against transition items
-                    //If player has required items, remove items from inventory and make transition
-                    //Else print you're missing something
+                    if(t.haveRequiredItems(player.getInventory()))
+                    {
+                        makeTransition(t);
+                    }
+                    else
+                    {
+                        printLine("You seem to be missing something");
+                    }
                 }
             }
             else
@@ -114,6 +121,9 @@ public class Game
     private Story createMockStory()
     {
         Story story = new Story();
+        Item testItem = new Item();
+        Item testItem2 = new Item();
+        player.addItem(testItem);
 
         StoryNode node1 = new StoryNode();
         node1.setDescription("You are on Tinmeadow Crescent, smoking your last joint");
@@ -124,9 +134,12 @@ public class Game
         node2.setId(2);
 
         StoryTransition transition1to2 = new StoryTransition("kick", node2.getId());
+        transition1to2.addRequiredItem(testItem);
+        transition1to2.addItem(testItem2);
         node1.addTransition(transition1to2);
 
         StoryTransition transition2to1 = new StoryTransition("punch", node1.getId());
+        transition2to1.addRequiredItem(testItem2);
         node2.addTransition(transition2to1);
 
         story.addNode(node1);
@@ -135,6 +148,13 @@ public class Game
         story.setStartNodeId(node1.getId());
 
         return story;
+    }
+
+    public void makeTransition(StoryTransition t)
+    {
+        player.getInventory().addAll(t.getItems());
+        currentStoryNode = activeStory.getNode(t.getNextNodeId());
+        printLine(currentStoryNode.getDescription());
     }
 
 }

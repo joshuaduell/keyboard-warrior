@@ -10,7 +10,7 @@ public class Player
 
     public Player()
     {
-
+        inventory = new ArrayList<>();
     }
 
     public void addItem(Item item)
@@ -21,5 +21,10 @@ public class Player
     public void removeItem(Item item)
     {
         inventory.remove(item);
+    }
+
+    public ArrayList getInventory()
+    {
+        return inventory;
     }
 }

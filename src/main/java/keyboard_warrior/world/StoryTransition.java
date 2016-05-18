@@ -11,16 +11,18 @@ public class StoryTransition {
     private ArrayList<Item> items;
     private ArrayList<Item> requiredItems;
 
-
     public StoryTransition()
     {
-
+        items = new ArrayList<>();
+        requiredItems = new ArrayList<>();
     }
 
     public StoryTransition(String keyWord, int nextNodeId)
     {
         this.keyWord = keyWord;
         this.nextNodeId = nextNodeId;
+        items = new ArrayList<>();
+        requiredItems = new ArrayList<>();
     }
 
     public String getKeyWord()
@@ -55,11 +57,33 @@ public class StoryTransition {
 
     public boolean requiresItems()
     {
-        if(requiredItems == null)
+        if(requiredItems.size() == 0)
         {
             return false;
         }
 
+        return true;
+    }
+
+    public ArrayList getRequiredItems()
+    {
+        return requiredItems;
+    }
+
+    public ArrayList getItems()
+    {
+        return items;
+    }
+
+    public boolean haveRequiredItems(ArrayList inventory)
+    {
+        for(Item item : requiredItems)
+        {
+            if(!inventory.contains(item))
+            {
+                return false;
+            }
+        }
         return true;
     }
 }
