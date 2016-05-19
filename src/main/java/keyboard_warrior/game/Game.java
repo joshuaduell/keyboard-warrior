@@ -23,8 +23,8 @@ public class Game
 
 	public Game()
     {
-        activeStory = createMockStory();
         player = new Player();
+        activeStory = createMockStory();
 
         try {
             FileManager.saveStory(activeStory, "test_story.txt");
@@ -67,6 +67,10 @@ public class Game
                 printLine("Goodbye");
                 return;
             }
+            else if(input.equalsIgnoreCase("status"))
+            {
+                printLine("Health: " + player.getHealth());
+            }
             else if(currentStoryNode.checkKeyWord(input))
             {
                 StoryTransition t = currentStoryNode.getTransition(input);
@@ -77,7 +81,7 @@ public class Game
                 }
                 else
                 {
-                    if(t.haveRequiredItems(player.getInventory()))
+                    if(t.haveRequiredItems(player.getInventory().getItems()))
                     {
                         makeTransition(t);
                     }
@@ -123,7 +127,7 @@ public class Game
         Story story = new Story();
         Item testItem = new Item();
         Item testItem2 = new Item();
-        player.addItem(testItem);
+        player.getInventory().addItem(testItem);
 
         StoryNode node1 = new StoryNode();
         node1.setDescription("You are on Tinmeadow Crescent, smoking your last joint");
@@ -152,7 +156,7 @@ public class Game
 
     public void makeTransition(StoryTransition t)
     {
-        player.getInventory().addAll(t.getItems());
+        player.getInventory().getItems().addAll(t.getItems());
         currentStoryNode = activeStory.getNode(t.getNextNodeId());
         printLine(currentStoryNode.getDescription());
     }

@@ -4,11 +4,18 @@ import java.util.ArrayList;
 
 public class Story {
 
+    private String name;
     private ArrayList<StoryNode> nodes;
     private int startNodeId;
 
-    public Story(){
+    public Story()
+    {
+        nodes = new ArrayList<>();
+    }
 
+    public Story(String name)
+    {
+        this.name = name;
         nodes = new ArrayList<>();
     }
 

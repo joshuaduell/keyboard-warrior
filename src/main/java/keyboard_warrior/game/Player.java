@@ -1,29 +1,42 @@
 package keyboard_warrior.game;
 
+import keyboard_warrior.inventory.Inventory;
 import keyboard_warrior.inventory.Item;
 
 import java.util.ArrayList;
 
 public class Player
 {
-    private ArrayList<Item> inventory;
+    private int health;
+    private Inventory inventory;
 
     public Player()
     {
-        inventory = new ArrayList<>();
+        health = 100;
+        inventory = new Inventory();
     }
 
-    public void addItem(Item item)
+    public int getHealth()
     {
-        inventory.add(item);
+        return health;
     }
 
-    public void removeItem(Item item)
+    public void setHealth(int health)
     {
-        inventory.remove(item);
+        this.health = health;
     }
 
-    public ArrayList getInventory()
+    public void increaseHealth(int healthIncrease)
+    {
+        health += healthIncrease;
+    }
+
+    public void decreaseHealth(int healthDecrease)
+    {
+        health -= healthDecrease;
+    }
+
+    public Inventory getInventory()
     {
         return inventory;
     }
