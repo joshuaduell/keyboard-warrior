@@ -1,5 +1,9 @@
 package keyboard_warrior.inventory;
 
+/**
+ * Used to access specific transitions.
+ */
+
 public class Item
 {
 	private String name;

@@ -1,15 +1,14 @@
 package keyboard_warrior.ui.swing;
 
-import keyboard_warrior.editor.Editor;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by joshua on 19/05/2016.
+ * GUI for editor.
  */
+
 public class EditorWindow extends JPanel implements ActionListener
 {
     private JFrame editorFrame;

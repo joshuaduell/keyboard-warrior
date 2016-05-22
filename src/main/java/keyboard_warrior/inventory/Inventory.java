@@ -3,8 +3,9 @@ package keyboard_warrior.inventory;
 import java.util.ArrayList;
 
 /**
- * Created by joshua on 19/05/2016.
+ * Stores items that the player has collected.
  */
+
 public class Inventory
 {
     private ArrayList<Item> items;

@@ -1,7 +1,10 @@
 package keyboard_warrior.world;
 
-
 import java.util.ArrayList;
+
+/**
+ * The current point in the story.
+ */
 
 public class StoryNode {
 

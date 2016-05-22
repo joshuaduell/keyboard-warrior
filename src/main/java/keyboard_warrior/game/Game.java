@@ -7,7 +7,6 @@ import keyboard_warrior.world.Story;
 import keyboard_warrior.world.StoryNode;
 import keyboard_warrior.world.StoryTransition;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -19,7 +18,6 @@ public class Game
     private Player player;
     private Story activeStory;
     private StoryNode currentStoryNode;
-
 
 	public Game()
     {
@@ -130,24 +128,29 @@ public class Game
         player.getInventory().addItem(testItem);
 
         StoryNode node1 = new StoryNode();
-        node1.setDescription("You are on Tinmeadow Crescent, smoking your last joint");
+        node1.setDescription("You start walking along the dimly lit corridor, you can see a small satchel on the ground just ahead");
         node1.setId(1);
 
         StoryNode node2 = new StoryNode();
-        node2.setDescription("Leo Dennis has confronted you wielding an 8th");
+        node2.setDescription("As you open the satchel it spews out a noxious gas. You fall to the ground struggling for breath as the poison seeps into your lungs. You journey is over...");
         node2.setId(2);
+
+        StoryNode node3 = new StoryNode();
+        node3.setDescription("Wary of the satchels contents you continue walking straight ahead");
+        node3.setId(3);
 
         StoryTransition transition1to2 = new StoryTransition("kick", node2.getId());
         transition1to2.addRequiredItem(testItem);
         transition1to2.addItem(testItem2);
         node1.addTransition(transition1to2);
 
-        StoryTransition transition2to1 = new StoryTransition("punch", node1.getId());
-        transition2to1.addRequiredItem(testItem2);
-        node2.addTransition(transition2to1);
+        StoryTransition transition1to3 = new StoryTransition("punch", node3.getId());
+        transition1to3.addRequiredItem(testItem2);
+        node2.addTransition(transition1to3);
 
         story.addNode(node1);
         story.addNode(node2);
+        story.addNode(node3);
 
         story.setStartNodeId(node1.getId());
 

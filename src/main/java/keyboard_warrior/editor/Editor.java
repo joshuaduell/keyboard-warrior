@@ -7,8 +7,9 @@ import keyboard_warrior.world.StoryNode;
 import keyboard_warrior.world.StoryTransition;
 
 /**
- * Created by bayle on 17/05/2016.
+ * Creates a Story.
  */
+
 public class Editor
 {
     public Editor()
@@ -35,6 +36,5 @@ public class Editor
     {
         Item item = new Item(name, description);
     }
-
 
 }

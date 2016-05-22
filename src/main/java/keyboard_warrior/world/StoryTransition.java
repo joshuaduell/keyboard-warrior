@@ -4,6 +4,10 @@ import keyboard_warrior.inventory.Item;
 
 import java.util.ArrayList;
 
+/**
+ * The link between StoryNodes.
+ */
+
 public class StoryTransition {
 
     private String keyWord;

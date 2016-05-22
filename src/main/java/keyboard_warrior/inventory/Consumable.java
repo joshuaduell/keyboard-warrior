@@ -1,8 +1,9 @@
 package keyboard_warrior.inventory;
 
 /**
- * Created by joshua on 19/05/2016.
+ * Modifies player attributes.
  */
+
 public class Consumable
 {
     public Consumable()

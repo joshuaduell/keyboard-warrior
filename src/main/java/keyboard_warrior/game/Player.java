@@ -1,9 +1,10 @@
 package keyboard_warrior.game;
 
 import keyboard_warrior.inventory.Inventory;
-import keyboard_warrior.inventory.Item;
 
-import java.util.ArrayList;
+/**
+ * Player attributes such as hit points.
+ */
 
 public class Player
 {

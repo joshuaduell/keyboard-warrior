@@ -2,8 +2,12 @@ package keyboard_warrior.world;
 
 import java.util.ArrayList;
 
-public class Story {
+/**
+ * The story represented as a collection of StoryNodes.
+ */
 
+public class Story
+{
     private String name;
     private ArrayList<StoryNode> nodes;
     private int startNodeId;
